@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookings</title>
+
+    <style>
+        .a 
+        {
+            background-color: antiquewhite;
+            height: 75px;
+            border: 2px solid black;
+            border-radius: 20px;
+            text-align-last: center;
+        }
+
+        .b 
+        {
+            height: 10px;
+            padding: 5px;
+            margin: 35px;
+        }
+
+        .login {
+            margin: 20px;
+            margin-top: 25px;
+            height: 50px;
+            padding: 20px;
+        }
+
+        .booking {
+            background-color: antiquewhite;
+            width: 750px;
+            height: 380px;
+            border: 2px solid black;
+            border-radius: 20px;
+            margin-top: 15px;
+            margin-left: 22%;
+        }
+    </style>
+    <script>
+        function Validate() {
+            var src = parseFloat(document.Myform.source.value);
+            var dest = parseFloat(document.Myform.destination.value);
+            var num = parseFloat(document.Myform.count.value);
+            var adult = parseFloat(document.Myform.adult.value);
+            var child = parseFloat(document.Myform.child.value);
+            if (src == dest) 
+            {
+                alert("source and destiation cannot be same....!");
+                return;
+            }
+            else if (num != (adult + child)) 
+            {
+                alert("Incorrect ticket count...!")
+                return;
+            }
+            else {
+                var fare = src - dest;
+                if (fare < 0) fare = fare * (-1);
+                fare = fare * 100;
+                fare = fare * adult + (fare / 2) * child;
+                document.Myform.price.value = fare;
+            }
+
+        }
+        function Book() {
+            if (document.Myform.price.value.length == 0) {
+                alert("Enter the details...!");
+                return;
+            }
+            var ans = confirm("Fare = " + document.Myform.price.value + "\rGo to Paymentgateway...");
+            if (ans == 1) {
+                alert("Payment gateway");
+                onload("payment.html");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="a">
+        <h2>
+            <big>Enter the booking details :</big>
+        </h2>
+        <br>
+    </div>
+
+    <form name="Myform">
+        <div name="booking" class="booking">
+            <div class="b">
+                <label name="source">From :</label>
+                <select name="source" value="">
+                    <option value="1">Hubli</option>
+                    <option value="2">Gadag</option>
+                    <option value="3">Koppal</option>
+                    <option value="4">Bengaluru</option>
+                    <option value="5">Mysuru</option>
+                </select>
+
+                <label name="destination">To :</label>
+                <select name="destination" value="">
+                    <option value="1">Hubli</option>
+                    <option value="2">Gadag</option>
+                    <option value="3">Koppal</option>
+                    <option value="4">Bengaluru</option>
+                    <option value="5">Mysuru</option>
+                </select>
+
+            </div>
+            <div class="b">
+                <label name="count">Number of tickets :</label>
+                <input type="number" name="count" value="" placeholder="Number of tickets ">
+                <br>
+                <br>
+
+                <label name="adult">Adults :</label>
+                <input type="number" name="adult" value="" placeholder="Adults">
+                <br>
+                <br>
+                <label name="child">Child :</label>
+                <input type="number" name="child" value="" placeholder="Child">
+                <br>
+
+            </div>
+            <br>
+            <br>
+            <div class="b">
+                <input type="button" onclick="Validate()" value="Submit">
+            </div>
+            <div class="b">
+                <input type="text" name="price" placeholder="Fare in Rs" value="">
+                <br>
+                <br>
+                <input type="button" name="book" value="Book" onclick="Book()">
+            </div>
+    </form>
+
+</body>
+
+</html>
